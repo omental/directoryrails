@@ -45,6 +45,8 @@ group :development do
   gem 'spring'
   gem 'carrierwave'
   gem "mini_magick"
+  gem 'devise'
+
 
 end
 
