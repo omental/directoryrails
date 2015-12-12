@@ -15,21 +15,25 @@ Leave reviews and ratings for your fellow foodies
       <th>Address</th>
       <th>Phone</th>
       <th>Website</th>
+      <% if user_signed_in? && current_user.admin? %>
       <th>Actions </th>
-      <th colspan="3"></th>
+      
+      <th colspan="2"></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @restaurants.each do |restaurant| %>
       <tr>
-        <td><%= restaurant.name %></td>
+        <td><%= link_to restaurant.name, restaurant %></td>
         <td><%= restaurant.address %></td>
         <td><%= restaurant.phone %></td>
         <td><%= link_to restaurant.website, restaurant.website %></td>
-        <td><%= link_to 'Show', restaurant, class: "btn btn-link" %></td>
+        <% if user_signed_in? && current_user.admin? %>
         <td><%= link_to 'Edit', edit_restaurant_path(restaurant), class: "btn btn-link" %></td>
         <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -37,5 +41,8 @@ Leave reviews and ratings for your fellow foodies
 
 <br>
 
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'New Restaurant', new_restaurant_path, class: "btn btn-default" %>
+<% end %>
+
 <%= image_tag "http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/e41bc8917803/assets/img/structural/happy_footer.png" %>
